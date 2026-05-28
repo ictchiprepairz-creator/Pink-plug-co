@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pink Plug Co — Reseller Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --blush:      #f9c8d4;
+      --blush-deep: #f0a0b8;
+      --rose:       #e07090;
+      --rose-dark:  #c0506a;
+      --petal:      #fde8ef;
+      --cream:      #fef6f8;
+      --mauve:      #d4849a;
+      --mauve-dim:  #c8a0b0;
+      --text:       #3a1f28;
+      --text-soft:  #7a4f5c;
+      --text-dim:   #b08090;
+      --white:      #fff9fb;
+      --border:     rgba(224,112,144,0.18);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── PETAL TEXTURE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Ccircle cx='30' cy='30' r='1' fill='%23e07090' fill-opacity='0.06'/%3E%3Ccircle cx='10' cy='10' r='0.5' fill='%23e07090' fill-opacity='0.04'/%3E%3Ccircle cx='50' cy='50' r='0.5' fill='%23e07090' fill-opacity='0.04'/%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 500;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 900;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 56px;
+      background: rgba(254,246,248,0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-logo em {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--rose);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--rose); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* layered soft background */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 70% at 20% 10%, rgba(249,200,212,0.55) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 50% at 80% 80%, rgba(240,160,184,0.35) 0%, transparent 55%),
+        radial-gradient(ellipse 90% 80% at 50% 50%, rgba(253,232,239,0.8) 0%, var(--cream) 70%);
+    }
+
+    /* floating blob shapes */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      pointer-events: none;
+    }
+    .blob-1 {
+      width: 420px; height: 420px;
+      background: rgba(249,200,212,0.5);
+      top: -80px; left: -80px;
+      animation: drift 12s ease-in-out infinite alternate;
+    }
+    .blob-2 {
+      width: 300px; height: 300px;
+      background: rgba(240,160,184,0.35);
+      bottom: -40px; right: -60px;
+      animation: drift 15s ease-in-out infinite alternate-reverse;
+    }
+    .blob-3 {
+      width: 200px; height: 200px;
+      background: rgba(224,112,144,0.2);
+      top: 40%; left: 60%;
+      animation: drift 10s ease-in-out infinite alternate;
+    }
+
+    .hero-inner { position: relative; z-index: 2; }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 32px;
+      animation: fadeUp 0.7s ease both;
+    }
+    .hero-eyebrow::before,
+    .hero-eyebrow::after {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: var(--blush-deep);
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(58px, 11vw, 128px);
+      font-weight: 300;
+      line-height: 0.95;
+      letter-spacing: -1px;
+      color: var(--text);
+      animation: fadeUp 0.7s 0.1s ease both;
+    }
+    .hero h1 strong {
+      font-weight: 600;
+      color: var(--rose);
+      display: block;
+    }
+    .hero h1 em {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--mauve);
+    }
+
+    .hero-sub {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--text-soft);
+      max-width: 480px;
+      margin: 28px auto 0;
+      line-height: 1.8;
+      letter-spacing: 0.3px;
+      animation: fadeUp 0.7s 0.2s ease both;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 14px;
+      margin-top: 48px;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeUp 0.7s 0.3s ease both;
+    }
+
+    .btn-primary {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      background: var(--rose);
+      color: var(--white);
+      border: none;
+      padding: 16px 40px;
+      text-decoration: none;
+      border-radius: 40px;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 8px 24px rgba(224,112,144,0.3);
+      cursor: pointer;
+    }
+    .btn-primary:hover {
+      background: var(--rose-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(224,112,144,0.4);
+    }
+
+    .btn-outline {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      background: transparent;
+      color: var(--text-soft);
+      border: 1px solid var(--blush-deep);
+      padding: 16px 40px;
+      text-decoration: none;
+      border-radius: 40px;
+      transition: border-color 0.2s, color 0.2s, transform 0.15s;
+      cursor: pointer;
+    }
+    .btn-outline:hover {
+      border-color: var(--rose);
+      color: var(--rose);
+      transform: translateY(-2px);
+    }
+
+    /* petal deco */
+    .hero-deco {
+      position: absolute;
+      font-size: 80px;
+      opacity: 0.08;
+      pointer-events: none;
+      animation: spin 30s linear infinite;
+    }
+    .hero-deco-1 { top: 15%; left: 8%; animation-direction: normal; }
+    .hero-deco-2 { bottom: 18%; right: 6%; animation-direction: reverse; font-size: 50px; }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      animation: bounce 2.5s ease-in-out infinite;
+    }
+    .hero-scroll span {
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+    .hero-scroll .line {
+      width: 1px;
+      height: 36px;
+      background: linear-gradient(to bottom, var(--rose), transparent);
+    }
+
+    /* ── MARQUEE ── */
+    .marquee-strip {
+      background: linear-gradient(90deg, var(--blush-deep), var(--blush), var(--blush-deep));
+      overflow: hidden;
+      padding: 13px 0;
+    }
+    .marquee-track {
+      display: flex;
+      white-space: nowrap;
+      animation: marquee 24s linear infinite;
+    }
+    .marquee-track span {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--rose-dark);
+      padding: 0 28px;
+    }
+    .marquee-track .dot {
+      color: var(--mauve);
+      font-size: 10px;
+      padding: 0 4px;
+      letter-spacing: 0;
+    }
+
+    /* ── SECTION COMMON ── */
+    .section-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(38px, 5.5vw, 66px);
+      font-weight: 300;
+      line-height: 1.05;
+      color: var(--text);
+    }
+    .section-title strong { font-weight: 600; }
+    .section-title em { font-style: italic; color: var(--mauve); }
+
+    .divider {
+      width: 48px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--rose), var(--blush));
+      margin: 20px 0;
+      border-radius: 2px;
+    }
+
+    /* ── VENDORS ── */
+    #vendors {
+      padding: 120px 56px;
+      background: var(--white);
+    }
+
+    .vendors-header {
+      max-width: 1160px;
+      margin: 0 auto 60px;
+    }
+
+    .vendors-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 16px;
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    .vendor-card {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 38px 28px 32px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .vendor-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(249,200,212,0.4), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      border-radius: 20px;
+    }
+
+    .vendor-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 48px rgba(224,112,144,0.15);
+      border-color: var(--blush-deep);
+    }
+    .vendor-card:hover::after { opacity: 1; }
+
+    .vendor-icon {
+      font-size: 34px;
+      margin-bottom: 20px;
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+
+    .vendor-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .vendor-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-soft);
+      line-height: 1.7;
+      margin-bottom: 22px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .vendor-pill {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--rose);
+      background: rgba(224,112,144,0.1);
+      border: 1px solid rgba(224,112,144,0.2);
+      padding: 5px 14px;
+      border-radius: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .vendor-arrow {
+      position: absolute;
+      bottom: 28px;
+      right: 28px;
+      font-size: 16px;
+      color: var(--blush-deep);
+      transition: color 0.2s, transform 0.2s;
+      z-index: 1;
+    }
+    .vendor-card:hover .vendor-arrow {
+      color: var(--rose);
+      transform: translate(3px, -3px);
+    }
+
+    /* ── GUIDE ── */
+    #guide {
+      padding: 120px 56px;
+      background: var(--petal);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #guide::before {
+      content: '';
+      position: absolute;
+      top: -120px; right: -120px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(249,200,212,0.5), transparent 70%);
+      pointer-events: none;
+    }
+
+    .guide-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .guide-price-block {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin: 32px 0 36px;
+    }
+    .guide-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 80px;
+      font-weight: 300;
+      color: var(--rose);
+      line-height: 1;
+    }
+    .guide-price-note {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-dim);
+    }
+
+    .guide-features {
+      list-style: none;
+      margin-bottom: 44px;
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+    }
+    .guide-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--text-soft);
+      line-height: 1.6;
+    }
+    .guide-features li::before {
+      content: '✦';
+      color: var(--blush-deep);
+      font-size: 10px;
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+
+    .guide-right { padding-top: 50px; }
+
+    .platforms-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 20px;
+    }
+
+    .platform-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .platform-item {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .platform-item:hover {
+      border-color: var(--blush-deep);
+      box-shadow: 0 4px 16px rgba(224,112,144,0.1);
+    }
+
+    .platform-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .platform-pill {
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--mauve-dim);
+      background: rgba(212,132,154,0.1);
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      padding: 120px 56px;
+      background: var(--white);
+    }
+
+    .about-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-text p {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--text-soft);
+      line-height: 1.9;
+      margin-bottom: 18px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .stat-card {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px 24px;
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .stat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(224,112,144,0.12);
+    }
+
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 52px;
+      font-weight: 300;
+      color: var(--rose);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-top: 8px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--petal);
+      border-top: 1px solid var(--border);
+      padding: 52px 56px 36px;
+    }
+
+    .footer-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+    .footer-logo em { font-style: italic; font-weight: 300; color: var(--rose); }
+
+    .footer-links {
+      display: flex;
+      gap: 28px;
+    }
+    .footer-links a {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--rose); }
+
+    .footer-copy {
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 0.5px;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes drift {
+      from { transform: translate(0, 0) scale(1); }
+      to   { transform: translate(30px, 20px) scale(1.06); }
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(8px); }
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      #vendors, #guide, #about { padding: 80px 24px; }
+      .guide-inner, .about-inner { grid-template-columns: 1fr; gap: 48px; }
+      .guide-right { padding-top: 0; }
+      footer { padding: 40px 24px 28px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 600px) {
+      .vendors-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+
+  <nav>
+    <a href="#" class="nav-logo">Pink <em>Plug</em> Co</a>
+    <ul class="nav-links">
+      <li><a href="#vendors">Vendors</a></li>
+      <li><a href="#guide">Guide</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#guide" style="color:var(--rose)">Get Started</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="hero-deco hero-deco-1">✿</div>
+    <div class="hero-deco hero-deco-2">❀</div>
+
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Your Reseller Headquarters</div>
+      <h1>
+        Pink<br>
+        <strong>Plug</strong><br>
+        <em>Co.</em>
+      </h1>
+      <p class="hero-sub">Premium vendor connects & the blueprint to start your own reselling empire — served with a bow.</p>
+      <div class="hero-ctas">
+        <a href="#vendors" class="btn-primary">Shop Vendors</a>
+        <a href="#guide" class="btn-outline">Get the Guide</a>
+      </div>
+    </div>
+
+    <div class="hero-scroll">
+      <span>Scroll</span>
+      <div class="line"></div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+
+  <div class="marquee-strip">
+    <div class="marquee-track">
+      <span>Activewear</span><span class="dot">✦</span>
+      <span>Earbuds</span><span class="dot">✦</span>
+      <span>Perfume</span><span class="dot">✦</span>
+      <span>Handbags</span><span class="dot">✦</span>
+      <span>Streetwear</span><span class="dot">✦</span>
+      <span>Resell Guide</span><span class="dot">✦</span>
+      <span>Depop</span><span class="dot">✦</span>
+      <span>Poshmark</span><span class="dot">✦</span>
+      <span>eBay</span><span class="dot">✦</span>
+      <!-- duplicate for loop -->
+      <span>Activewear</span><span class="dot">✦</span>
+      <span>Earbuds</span><span class="dot">✦</span>
+      <span>Perfume</span><span class="dot">✦</span>
+      <span>Handbags</span><span class="dot">✦</span>
+      <span>Streetwear</span><span class="dot">✦</span>
+      <span>Resell Guide</span><span class="dot">✦</span>
+      <span>Depop</span><span class="dot">✦</span>
+      <span>Poshmark</span><span class="dot">✦</span>
+      <span>eBay</span><span class="dot">✦</span>
+    </div>
+  </div>
+
+  <!-- VENDORS -->
+
+  <section id="vendors">
+    <div class="vendors-header">
+      <p class="section-label">Exclusive Connects</p>
+      <h2 class="section-title">Vendor <strong>Links</strong></h2>
+      <div class="divider"></div>
+      <p style="font-size:14px; font-weight:300; color:var(--text-soft); max-width:480px; line-height:1.8;">
+        Handpicked supplier connections across five categories. Each link is a direct plug — no middlemen, real margins.
+      </p>
+    </div>
+    <div class="vendors-grid">
+
+      <div class="vendor-card">
+        <span class="vendor-icon">🏃</span>
+        <div class="vendor-name">Activewear</div>
+        <p class="vendor-desc">High-quality athletic & fitness apparel. Leggings, sets, sports bras — built to move and flip fast.</p>
+        <span class="vendor-pill">Apparel</span>
+        <div id='product-component-1779946979288' style="margin-top:20px;"></div>
+      </div>
+
+      <a href="#" class="vendor-card">
+        <span class="vendor-icon">🎧</span>
+        <div class="vendor-name">Earbuds</div>
+        <p class="vendor-desc">Wireless earbuds & audio accessories with strong demand across every major resell platform.</p>
+        <span class="vendor-pill">Electronics</span>
+        <span class="vendor-arrow">↗</span>
+      </a>
+
+      <div class="vendor-card">
+        <span class="vendor-icon">🌹</span>
+        <div class="vendor-name">Perfume</div>
+        <p class="vendor-desc">Fragrance wholesale sourcing. Designer-inspired and niche scents with high perceived value.</p>
+        <span class="vendor-pill">Beauty</span>
+        <div id='product-component-1779946909297' style="margin-top:20px;"></div>
+      </div>
+
+      <a href="#" class="vendor-card">
+        <span class="vendor-icon">👜</span>
+        <div class="vendor-name">Purses & Bags</div>
+        <p class="vendor-desc">Handbags, crossbodies, and totes. One of the highest-margin categories in the resell game.</p>
+        <span class="vendor-pill">Accessories</span>
+        <span class="vendor-arrow">↗</span>
+      </a>
+
+      <a href="#" class="vendor-card">
+        <span class="vendor-icon">🔥</span>
+        <div class="vendor-name">Streetwear</div>
+        <p class="vendor-desc">Urban fashion, hoodies, graphic tees, and statement pieces that move quick on Depop & Poshmark.</p>
+        <span class="vendor-pill">Fashion</span>
+        <span class="vendor-arrow">↗</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- GUIDE -->
+
+  <section id="guide">
+    <div class="guide-inner">
+      <div class="guide-left">
+        <p class="section-label">The Blueprint</p>
+        <h2 class="section-title">Reseller<br><em>Guide</em></h2>
+        <div class="divider"></div>
+
+        <div class="guide-price-block">
+          <div class="guide-price">$XX</div>
+          <span class="guide-price-note">one-time · instant access</span>
+        </div>
+
+        <ul class="guide-features">
+          <li>Step-by-step breakdown of how to start reselling from scratch</li>
+          <li>Platform deep-dives: Depop, Poshmark, eBay, Mercari & more</li>
+          <li>How to price your items for maximum profit</li>
+          <li>Sourcing strategies — where to find inventory beyond my vendor links</li>
+          <li>Photography & listing tips that actually get clicks</li>
+          <li>Shipping basics, packaging, and keeping your reviews clean</li>
+          <li>Scaling from side hustle to serious income</li>
+        </ul>
+
+        <div id='product-component-1779947053284' style="margin-top:8px;"></div>
+      </div>
+
+      <div class="guide-right">
+        <p class="platforms-label">Platforms Covered</p>
+        <div class="platform-list">
+          <div class="platform-item">
+            <span class="platform-name">Depop</span>
+            <span class="platform-pill">Fashion Forward</span>
+          </div>
+          <div class="platform-item">
+            <span class="platform-name">Poshmark</span>
+            <span class="platform-pill">Top Earner</span>
+          </div>
+          <div class="platform-item">
+            <span class="platform-name">eBay</span>
+            <span class="platform-pill">Largest Reach</span>
+          </div>
+          <div class="platform-item">
+            <span class="platform-name">Mercari</span>
+            <span class="platform-pill">Fast Sales</span>
+          </div>
+          <div class="platform-item">
+            <span class="platform-name">Facebook Marketplace</span>
+            <span class="platform-pill">Local & Online</span>
+          </div>
+          <div class="platform-item">
+            <span class="platform-name">StockX / GOAT</span>
+            <span class="platform-pill">Sneakers & Hype</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+
+  <section id="about">
+    <div class="about-inner">
+      <div class="about-text">
+        <p class="section-label">Who We Are</p>
+        <h2 class="section-title" style="margin-bottom:24px;">The <em>Story</em></h2>
+        <div class="divider"></div>
+        <p>
+          Pink Plug Co was built for people serious about getting into the resell game the right way. No fluff, no gatekeeping — just real vendor sources and an honest guide to building income from your phone.
+        </p>
+        <p>
+          Whether you're starting with $50 or $500, the system works if you put in the work. Our vendor links are the same connects we use. The guide is everything we wish we had when we started.
+        </p>
+        <div style="margin-top:36px;">
+          <a href="#vendors" class="btn-primary">Explore Vendors</a>
+        </div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-num">5</div>
+          <div class="stat-label">Vendor Categories</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">6+</div>
+          <div class="stat-label">Platforms Covered</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">1</div>
+          <div class="stat-label">Guide. All You Need.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">$0</div>
+          <div class="stat-label">Middleman Fees</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">Pink <em>Plug</em> Co</div>
+      <div class="footer-links">
+        <a href="#vendors">Vendors</a>
+        <a href="#guide">Guide</a>
+        <a href="#about">About</a>
+      </div>
+      <p class="footer-copy">© 2025 Pink Plug Co. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- SHOPIFY BUY BUTTONS -->
+
+  <script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function() {
+    var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+
+    var products = [
+      { id: '15577630540145', node: 'product-component-1779946979288', btnText: 'Add to Cart' },
+      { id: '15577632014705', node: 'product-component-1779946909297', btnText: 'Add to Cart' },
+      { id: '15577636274545', node: 'product-component-1779947053284', btnText: 'Buy the Guide' }
+    ];
+
+    var btnStyles = {
+      "background-color": "#e07090",
+      "border-radius": "40px",
+      "font-family": "'DM Sans', sans-serif",
+      "font-size": "11px",
+      "letter-spacing": "2px",
+      "text-transform": "uppercase",
+      "padding": "12px 28px",
+      ":hover": { "background-color": "#c0506a" },
+      ":focus": { "background-color": "#c0506a" }
+    };
+
+    function makeOptions(btnText) {
+      return {
+        "product": {
+          "styles": {
+            "product": { "@media (min-width: 601px)": { "max-width": "100%", "margin-left": "0px", "margin-bottom": "0px" } },
+            "button": btnStyles
+          },
+          "text": { "button": btnText }
+        },
+        "productSet": { "styles": { "products": { "@media (min-width: 601px)": { "margin-left": "0px" } } } },
+        "modalProduct": {
+          "contents": { "img": false, "imgWithCarousel": true, "button": false, "buttonWithQuantity": true },
+          "styles": { "product": { "@media (min-width: 601px)": { "max-width": "100%", "margin-left": "0px", "margin-bottom": "0px" } } },
+          "text": { "button": btnText }
+        },
+        "option": {},
+        "cart": { "text": { "total": "Subtotal", "button": "Checkout" } },
+        "toggle": {}
+      };
+    }
+
+    function initShopify() {
+      var client = ShopifyBuy.buildClient({
+        domain: 'zjtugi-cu.myshopify.com',
+        storefrontAccessToken: 'd26707b21db0d7c158c247164f330c11',
+      });
+      ShopifyBuy.UI.onReady(client).then(function (ui) {
+        products.forEach(function(p, i) {
+          setTimeout(function() {
+            var node = document.getElementById(p.node);
+            if (node) {
+              ui.createComponent('product', {
+                id: p.id,
+                node: node,
+                moneyFormat: '%24%7B%7Bamount%7D%7D',
+                options: makeOptions(p.btnText)
+              });
+            }
+          }, i * 200);
+        });
+      });
+    }
+
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = scriptURL;
+    script.onload = initShopify;
+    document.head.appendChild(script);
+  });
+  </script>
+
+</body>
+</html>
